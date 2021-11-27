@@ -78,6 +78,10 @@ const WaveForm = () => {
     }
   };
 
+  useEffect(() => {
+    checkIfWalletIsConnected();
+  }, []);
+
   /**
  * Listen in for emitter events!
  */
