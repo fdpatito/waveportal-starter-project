@@ -40,7 +40,7 @@ const WaveForm = () => {
         /*
         * Store our data in React State
         */
-        setAllWaves(wavesCleaned);
+        setAllWaves(wavesCleaned.reverse());
       } else {
         console.log('Ethereum object doesn\'t exist!');
       }
@@ -91,12 +91,12 @@ const WaveForm = () => {
     const onNewWave = (from, timestamp, message) => {
       console.log('NewWave', from, timestamp, message);
       setAllWaves(prevState => [
-        ...prevState,
         {
           address: from,
           timestamp: new Date(timestamp * 1000),
           message: message,
         },
+        ...prevState,
       ]);
     };
 
@@ -156,10 +156,10 @@ const WaveForm = () => {
         await waveTxn.wait();
         console.log("Mined -- ", waveTxn.hash);
 
+        setValue('');
+
         count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
-
-        setValue('');
       } else {
         console.log('Ethereum object doesn\' exist');
       }
@@ -220,7 +220,7 @@ const WaveForm = () => {
           </Button>
 
           {
-            allWaves.reverse().map((dweet, index) => (
+            allWaves.map((dweet, index) => (
               <div key={index} className="dweets-container">
                 <Card sx={{ height: 100 }}>
                   <CardActionArea>
