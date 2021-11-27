@@ -154,6 +154,8 @@ const WaveForm = () => {
 
         count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
+
+        setValue('');
       } else {
         console.log('Ethereum object doesn\' exist');
       }
